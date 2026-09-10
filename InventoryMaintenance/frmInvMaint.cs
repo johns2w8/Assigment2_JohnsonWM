@@ -17,36 +17,53 @@ namespace InventoryMaintenance
             InitializeComponent();
         }
 
-        // TODO: Declare here a private variable that can store a list of InvItem objects and intialize it to null.
+        // Wes Johnson
+
+        private List<InvItem> invItems = null;
 
         private void frmInvMaint_Load(object sender, EventArgs e)
         {
-            // TODO: Load the list of inventory items from the database class (InvItemDB).
-            // Hint: Call InvItemDB.GetItems() and assign the result to invItems.
+            // Wes Johnson
+
+            List<InvItem> load = InvItemDB.GetItems();
+            invItems = load;
 
 
-            // This method call updates the list box with the items.
+            // Wes Johnson
             FillItemListBox();
         }
 
         private void FillItemListBox()
         {
             lstItems.Items.Clear();
-            // TODO: Code here that loads the list box with the items in the list.
-            // Hint: Loop through each item in invItems and add it to lstItems.
-            
+            // Wes Johnson
+
+            var fillList = invItems;
+            foreach(var invItems in fillList)
+            {
+                lstItems.Items.Add(invItems.GetDisplayText(", "));
+            }
 
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            // TODO: Create an instance of the new item form (frmNewItem).
-            // TODO: Call the form’s method to get the new item from the user.
-            // TODO: If a new item was created (not null), add it to invItems,
-            //       save the updated list using InvItemDB.SaveItems, 
-            //       and refresh the list box by calling FillItemListBox().
+            // Wes Johnson
 
+            frmNewItem newItem = new frmNewItem();
 
+            // Wes Johnson
+
+            newItem.GetNewItem();
+
+            // Wes Johnson
+
+            if (newItem.item != null)
+            {
+                invItems.Add(newItem.item);
+                InvItemDB.SaveItems(invItems);
+                FillItemListBox();
+            }
 
         }
 
@@ -55,12 +72,22 @@ namespace InventoryMaintenance
             int i = lstItems.SelectedIndex;
             if (i != -1)
             {
-                // TODO: Add code here that displays a dialog box (Yes/No) to confirm the deletion 
-                //       Hint: Use MessageBox.Show with MessageBoxButtons.YesNo
-                // TODO: If the user clicks "Yes":
-                //          - Remove the selected item from invItems
-                //          - Save the updated list with InvItemDB.SaveItems
-                //          - Refresh the list box by calling FillItemListBox()
+                // Wes Johnson
+
+                DialogResult result = MessageBox.Show(
+                    "Are you certain you wish to delete this?",
+                    "Confrim Deletion",
+                    MessageBoxButtons.YesNo
+                    );
+
+                // Wes Johnson
+
+                if (result == DialogResult.Yes)
+                {
+                    invItems.RemoveAt(i);
+                    InvItemDB.SaveItems(invItems);
+                    FillItemListBox();
+                }
 
 
 

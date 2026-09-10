@@ -15,15 +15,12 @@ namespace InventoryMaintenance
             InitializeComponent();
         }
 
-        // TODO: Declare a variable that declares a new InvItem object and set it to null.
-        // Hint: Make it public so frmInvMaint can access the item after this form closes.
+        // Wes Johnson
         public InvItem item = null;
 
 
-        // TODO: Create a method that shows this form as a dialog window
-        //       and then returns the new InvItem created by the user.
-        // Hint: Use this.ShowDialog() to display the form.
-       
+        // Wes Johnson
+
         public InvItem GetNewItem()
         {
             this.ShowDialog();
@@ -36,14 +33,13 @@ namespace InventoryMaintenance
         {
             if (IsValidData())
             {
-                // TODO: Create a new InvItem object using the values from the text boxes.
-                //       - Convert txtItemNo.Text to an int
-                //       - Use txtDescription.Text as the description
-                //       - Convert txtPrice.Text to a decimal
-                // TODO: Assign the new object to the item variable.
-                // TODO: Close the form after saving the item.
-                
-                InvItem isValid = new InvItem(Convert.ToInt32(txtItemNo.Text),)
+                // Wes Johnson
+
+                InvItem isValid = new InvItem(Convert.ToInt32(txtItemNo.Text), txtDescription.Text, Convert.ToDecimal(txtPrice.Text));
+
+                item = isValid;
+
+                this.Close();
             }
         }
 
