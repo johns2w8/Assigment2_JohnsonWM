@@ -76,7 +76,7 @@ namespace InventoryMaintenance
 
                 DialogResult result = MessageBox.Show(
                     "Are you certain you wish to delete this?",
-                    "Confrim Deletion",
+                    "Confirm Deletion",
                     MessageBoxButtons.YesNo
                     );
 
